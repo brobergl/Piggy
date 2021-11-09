@@ -34,7 +34,7 @@ class Piggy(PiggyParent):
         ## This is a DICTIONARY, it's a list with custom index values. Python is cool.
         # Please feel free to change the menu and add options.
         print("\n *** MENU ***") 
-        menu = {"n": ("Navigate", self.nav),
+        menu = {"f": ("Navigate", self.nav),
                 "d": ("Dance", self.dance),
                 "o": ("Obstacle count", self.obstacle_count),
                 "s": ("Shy", self.shy),
