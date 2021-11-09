@@ -69,7 +69,7 @@ class Piggy(PiggyParent):
         # TODO: check to see if it's safe before dancing
         
         # lower-ordered example...
-         while True:
+         for i in range(17)
             self.fwd(540)
             time.sleep(2)
             turn_by_deg(34)
