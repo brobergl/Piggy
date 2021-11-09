@@ -72,11 +72,11 @@ class Piggy(PiggyParent):
         for i in range(17):
          self.fwd(540)
          time.sleep(2)
-         turn_by_deg(34)
+         self.turn_by_deg(34)
 
          self.back(540)
          time.sleep(2)
-         turn_by_deg(34)
+         self.turn_by_deg(34)
 
         
 
