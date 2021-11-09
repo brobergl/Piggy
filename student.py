@@ -34,7 +34,7 @@ class Piggy(PiggyParent):
         ## This is a DICTIONARY, it's a list with custom index values. Python is cool.
         # Please feel free to change the menu and add options.
         print("\n *** MENU ***") 
-        menu = {"f": ("Navigate", self.nav),
+        menu = {"n": ("Navigate", self.nav),
                 "d": ("Dance", self.dance),
                 "o": ("Obstacle count", self.obstacle_count),
                 "s": ("Shy", self.shy),
@@ -69,9 +69,15 @@ class Piggy(PiggyParent):
         # TODO: check to see if it's safe before dancing
         
         # lower-ordered example...
-        self.right(primary=50, counter=50)
-        time.sleep(2)
-        self.stop()
+       while True:
+          self.fwd(540)
+          time.sleep(2)
+          turn_by_deg(34)
+
+          self.back(540)
+          time.sleep(2)
+          turn_by_deg(34)
+
         
 
     def safe_to_dance(self):
