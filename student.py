@@ -59,7 +59,7 @@ class Piggy(PiggyParent):
     '''
     def lars(self):
       distance = self.read_distance()
-      if self.read_distance() < 20 :
+      if self.read_distance() < 150 :
         self.stop()
       while True:
         print (self.read_distance())
