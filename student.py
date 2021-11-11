@@ -55,8 +55,12 @@ class Piggy(PiggyParent):
     ****************
     STUDENT PROJECTS
     ****************
+    
     '''
     def lars(self):
+      while True:
+        print self.read_distance
+    def square(self):
       
       for i in range(4):
         self.fwd()
@@ -82,16 +86,11 @@ class Piggy(PiggyParent):
 
     def safe_to_dance(self):
         """ Does a 360 distance check and returns true if safe """
-        while True:
-          self.fwd(540)
-          time.sleep(2)
-          turn_by_deg(34)
-
-          self.back(540)
-          time.sleep(2)
-          turn_by_deg(34)
-
+        if safe_to_dance:
+    
+    
     def shake(self):
+
         """ Another example move """
         self.deg_fwd(720)
         self.stop()
