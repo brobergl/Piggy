@@ -90,7 +90,6 @@ class Piggy(PiggyParent):
     
     
     def shake(self):
-
         """ Another example move """
         self.deg_fwd(720)
         self.stop()
