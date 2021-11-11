@@ -58,6 +58,9 @@ class Piggy(PiggyParent):
     
     '''
     def lars(self):
+      mm = self.read_distance
+      if mm <20:
+        self.stop()
       while True:
         print (self.read_distance)
     def square(self):
