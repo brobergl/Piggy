@@ -63,6 +63,8 @@ class Piggy(PiggyParent):
       while True:
         if self.read_distance() < 150 :
           self.stop()
+          self.turn_by_deg(90)
+          self.fwd()
         
    
     def square(self):
