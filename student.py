@@ -61,9 +61,10 @@ class Piggy(PiggyParent):
     def lars(self):
       self.fwd()
       while True:
-        if self.read_distance() < 150 :
+        if (self.read_distance() < 150):
           self.turn_by_deg(180)
           self.fwd()
+          
         
    
     def square(self):
