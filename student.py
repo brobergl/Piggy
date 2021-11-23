@@ -89,8 +89,7 @@ class Piggy(PiggyParent):
         
     
     def lars(self):
-      self.fwd()
-      while True:
+      
         
           
           
