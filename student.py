@@ -58,20 +58,38 @@ class Piggy(PiggyParent):
     ****************
     
     '''
-    def lars(self):
+    
+    def go_around_box(self):
       self.fwd()
       while True:
         if (self.read_distance() < 150):
-          self.left()
-          time.sleep(1)
+          self.left(90)
+          
           self.fwd()
           time.sleep(1)
-          self.right()
-          time.sleep(1)
-          self.right()
-          time.sleep(1)
+          self.right(90)
           self.fwd()
           time.sleep(1)
+          self.right(90)
+          self.fwd()
+          time.sleep(1)
+        
+    
+    def turn_around_at_box(self):
+       self.fwd()
+       while True():  
+        if (self.read_distance() < 150):
+          self.right(180)
+          
+          self.stop()
+          self.fwd()
+
+        
+    
+    def lars(self):
+      self.fwd()
+      while True:
+        
           
           
         
