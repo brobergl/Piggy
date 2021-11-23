@@ -41,7 +41,7 @@ class Piggy(PiggyParent):
                 "f": ("Follow", self.follow),
                 "c": ("Calibrate", self.calibrate),
                 "q": ("Quit", self.quit),
-                "l": ("Lars Test", self.lars),
+                #"l": ("Lars Test", self.lars),
                 "s": ("Square", self.square),
                 "a": ("Go Around Box", self.go_around_box),
                 "t": ("Turn Around at Box", self.turn_around_at_box)
@@ -88,7 +88,7 @@ class Piggy(PiggyParent):
 
         
     
-    def lars(self):
+    #def lars(self):
       
         
           
