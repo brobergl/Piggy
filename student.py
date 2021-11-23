@@ -42,7 +42,9 @@ class Piggy(PiggyParent):
                 "c": ("Calibrate", self.calibrate),
                 "q": ("Quit", self.quit),
                 "l": ("Lars Test", self.lars),
-                "s": ("Square", self.square)
+                "s": ("Square", self.square),
+                "a": ("Go Around Box", self.go_around_box),
+                "t": ("Turn Around at Box", self.turn_around_at_box)
                 }
         # loop and print the menu...
         for key in sorted(menu.keys()):
