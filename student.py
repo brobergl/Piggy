@@ -88,7 +88,7 @@ class Piggy(PiggyParent):
 
         
     
-    def lars(self):
+    #def lars(self):
       
         
           
