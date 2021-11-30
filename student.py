@@ -65,16 +65,17 @@ class Piggy(PiggyParent):
       self.fwd()
       while True:
         if (self.read_distance() < 150):
-          self.left(90)
+          self.turn_by_deg(90)
           
           self.fwd()
           time.sleep(1)
-          self.right(90)
+          self.turn_by_deg(270)
           self.fwd()
           time.sleep(1)
-          self.right(90)
+          self.turn_by_deg(270)
           self.fwd()
           time.sleep(1)
+          self.turn_by_deg(90)
         
     
     def turn_around_at_box(self):
