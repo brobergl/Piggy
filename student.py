@@ -44,7 +44,9 @@ class Piggy(PiggyParent):
                 #"l": ("Lars Test", self.lars),
                 "s": ("Square", self.square),
                 "a": ("Go Around Box", self.go_around_box),
-                "t": ("Turn Around at Box", self.turn_around_at_box)
+                "t": ("Turn Around at Box", self.turn_around_at_box),
+                "sc":("Scan Around Box", self.scan_around_wall),
+                "g2":("Go Around Box (Premium)", self.scan_around_wall)
                 }
         # loop and print the menu...
         for key in sorted(menu.keys()):
@@ -60,9 +62,84 @@ class Piggy(PiggyParent):
     ****************
     
     '''
-    
+
+
+
+    def scan_around_wall(self):
+      back = 0
+      while True:
+          back = 0
+      while True:                                     
+        if (self.read_distance() > (300 + back)):             
+          self.fwd()                                 
+          time.sleep(1)                               
+          self.stop()                                 
+        elif (self.read_distance() < (299 + back)):           
+            self.servo(800)                           
+            time.sleep(1)                             
+            self.stop()                              
+            right = self.read_distance()              
+            self.servo(2000)                         
+            time.sleep(1)                            
+            self.stop()                               
+            left = self.read_distance()               
+            self.servo(1400)                          
+            time.sleep(1)                            
+            self.stop()                               
+            if (abs(right - left) > 100):
+              if (right > left):                        
+                self.servo(1400)                        
+                time.sleep(1)                         
+                self.stop()                             
+                self.wall_avoid()                      
+              elif (left > right):                     
+                self.servo(1400)                        
+                time.sleep(1)                           
+                self.stop()                            
+                self.wall_avoid_left()                 
+            else:
+              self.back()
+              time.sleep(2)
+              self.stop()
+              back += 100
+
+
+    def go_around_box2(self):
+      
+      while True:
+        if (self.read_distance() > 150):
+          self.fwd()
+        else (self.read_distance() < 150):
+          self.servo(1000)
+          time.sleep(1)
+          self.stop()
+          left = self.read_distance()
+          self.servo(1000)
+          time.sleep(1)
+          self.stop()
+          right = self.read_distance()
+          if (right > left):
+            self.go_around_box
+
+
+
     def go_around_box(self):
       self.fwd()
+      while True:
+        if (self.read_distance() < 150):
+          self.turn_by_deg(90)
+          
+          self.fwd()
+          time.sleep(1.5)
+          self.turn_by_deg(270)
+          self.fwd()
+          time.sleep(1)
+          self.turn_by_deg(270)
+          self.fwd()
+          time.sleep(1.5)
+          self.turn_by_deg(90)
+
+     self.fwd()
       while True:
         if (self.read_distance() < 150):
           self.turn_by_deg(90)
