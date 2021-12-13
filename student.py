@@ -107,9 +107,9 @@ class Piggy(PiggyParent):
     def go_around_box2(self):
       
       while True:
-        if(self.read_distance() > 150):
+        if (self.read_distance() > 150):
           self.fwd()
-        elif(self.read_distance() < 150):
+        elif (self.read_distance() < 150):
           self.servo(1000)
           time.sleep(1)
           self.stop()
