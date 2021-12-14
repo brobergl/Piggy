@@ -17,9 +17,9 @@ class Piggy(PiggyParent):
         ''' 
         MAGIC NUMBERS <-- where we hard-code our settings
         '''
-        self.LEFT_DEFAULT = 78
+        self.LEFT_DEFAULT = 77
         self.RIGHT_DEFAULT = 80
-        self.MIDPOINT = 1500  # what servo command (1000-2000) is straight forward for your bot?
+        self.MIDPOINT = 1300  # what servo command (1000-2000) is straight forward for your bot?
         self.set_motor_power(self.MOTOR_LEFT + self.MOTOR_RIGHT, 0)
         self.load_defaults()
         
@@ -41,12 +41,14 @@ class Piggy(PiggyParent):
                 "f": ("Follow", self.follow),
                 "c": ("Calibrate", self.calibrate),
                 "q": ("Quit", self.quit),
-                #"l": ("Lars Test", self.lars),
-                "s": ("Square", self.square),
-                "a": ("Go Around Box", self.go_around_box),
-                "t": ("Turn Around at Box", self.turn_around_at_box),
-                "sc":("Scan Around Box", self.scan_around_wall),
-                "g2":("Go Around Box (Premium)", self.scan_around_wall)
+                "v": ("Lars B. Test", self.lars),
+                "t": ("Turner Test", self.turner),
+                "p": ("Choice Test", self.Choice),
+                "h": ("check barriers test", self.Check),
+                "ben": ("D maze", self.Ben),
+                "m": ("do maze", self.Maze),
+                "b": ("Square test", self.square),
+                "sw":("Swerve", self.swr)
                 }
         # loop and print the menu...
         for key in sorted(menu.keys()):
@@ -60,147 +62,217 @@ class Piggy(PiggyParent):
     ****************
     STUDENT PROJECTS
     ****************
-    
     '''
-
-
-
-    def scan_around_wall(self):
-      back = 0
-      while True:
-          back = 0
-      while True:                                     
-        if (self.read_distance() > (300 + back)):             
-          self.fwd()                                 
-          time.sleep(1)                               
-          self.stop()                                 
-        elif (self.read_distance() < (299 + back)):           
-            self.servo(800)                           
-            time.sleep(1)                             
-            self.stop()                              
-            right = self.read_distance()              
-            self.servo(2000)                         
-            time.sleep(1)                            
-            self.stop()                               
-            left = self.read_distance()               
-            self.servo(1400)                          
-            time.sleep(1)                            
-            self.stop()                               
-            if (abs(right - left) > 100):
-              if (right > left):                        
-                self.servo(1400)                        
-                time.sleep(1)                         
-                self.stop()                             
-                self.wall_avoid()                      
-              elif (left > right):                     
-                self.servo(1400)                        
-                time.sleep(1)                           
-                self.stop()                            
-                self.wall_avoid_left()                 
-            else:
-              self.back()
-              time.sleep(2)
-              self.stop()
-              back += 100
-
-
-    def go_around_box2(self):
-      
-      while True:
-        if (self.read_distance() > 150):
-          self.fwd()
-        elif (self.read_distance() < 150):
-          self.servo(1000)
-          time.sleep(1)
-          self.stop()
-          left = self.read_distance()
-          self.servo(1000)
-          time.sleep(1)
-          self.stop()
-          right = self.read_distance()
-          if (right > left):
-            self.go_around_box
-
-
-
-    def go_around_box(self):
-      self.fwd()
-      while True:
-        if (self.read_distance() < 150):
-          self.turn_by_deg(90)
-          
-          self.fwd()
-          time.sleep(1.5)
-          self.turn_by_deg(270)
-          self.fwd()
-          time.sleep(1)
-          self.turn_by_deg(270)
-          self.fwd()
-          time.sleep(1.5)
-          self.turn_by_deg(90)
-
-      self.fwd()
-      while True:
-        if (self.read_distance() < 150):
-          self.turn_by_deg(90)
-          
-          self.fwd()
-          time.sleep(1.5)
-          self.turn_by_deg(270)
-          self.fwd()
-          time.sleep(1)
-          self.turn_by_deg(270)
-          self.fwd()
-          time.sleep(1.5)
-          self.turn_by_deg(90)
-        
-    
-    def turn_around_at_box(self):
-       self.fwd()
-       while True():  
-        if (self.read_distance() < 150):
-          self.right(180)
-          
-          self.stop()
-          self.fwd()
-
-        
-    
-    #def lars(self):
-      
-        
-          
-          
-        
-   
-    def square(self):
-      for i in range(4):
+    def lars(self):
+      while (self.read_distance() > 100):
         self.fwd()
-        time.sleep(.75)
+      while (self.read_distance() < 99): 
         self.stop()
-        self.turn_by_deg(90)
-      
-    def dance(self):
-        """A higher-ordered algorithm to make your robot dance"""
-        # TODO: check to see if it's safe before dancing
+
+    def Check(self):
+      self.fwd() 
+      barr_dist = 300
+      while True:
+        self.servo(self.MIDPOINT + 200)
+        if self.read_distance() <= barr_dist:
+          self.servo(self.MIDPOINT)
+          time.sleep(.25)
+          if self.read_distance() <= barr_dist:
+            self.Choice()  
+          else:  
+            self.swr("right")
+        else:
+          pass
+        self.servo(self.MIDPOINT)
+        time.sleep(.25)
+        if self.read_distance() <= barr_dist:
+          self.Choice()
+          #self.Choice()
+        else: 
+          pass
+        self.servo(self.MIDPOINT - 200)
+        time.sleep(.25)
+        # set 300 to variable
+        if self.read_distance()  <= barr_dist:
+          self.servo(self.MIDPOINT)
+          time.sleep(.25)
+          if self.read_distance() <= barr_dist:
+            self.Choice()  
+          else:
+            self.swr("left")
+       
+
         
-        # lower-ordered example...
-        for i in range(17):
-         self.fwd(540)
-         time.sleep(2)
-         self.turn_by_deg(34)
+    def swr(self, dir):
+      self.stop()
+      self.servo(self.MIDPOINT)
+      if "left" in dir:
+        self.stop()
+        self.left(primary = 60, counter = 30)
+        time.sleep(1.5)
+        self.fwd()
+        time.sleep(1.5)
+        self.right(primary = 60, counter=30)
+        time.sleep(1.5) 
+        self.fwd()
+      if "right" in dir:
+        self.left(primary = 30, counter=60)
+        time.sleep(1.5)
+        self.fwd()
+        time.sleep(1.5)
+        self.right(primary = 30, counter = 60)
+        time.sleep(1.5)
+        self.fwd()
+        time.sleep(1.5)
 
-         self.back(540)
-         time.sleep(2)
-         self.turn_by_deg(34)
 
+
+
+
+   #edward helped me with this the commented text was what I tried. why did it not work?   
+    def turner(self):
+      while True:
+        if(self.read_distance() > 200):
+          self.fwd()  
+        elif(self.read_distance() < 199):
+          self.right()
+          time.sleep(1)
+          self.fwd()
+          time.sleep(1)
+          self.left()
+          time.sleep(1)
+          self.fwd()
+
+      
+        
+    def Choice(self):
+
+      if(self.read_distance() < 299):
+        self.stop()
+        self.servo(1000)
+        time.sleep(1)
+        self.stop()
+          #global first
+        first = self.read_distance()
+        self.servo(2000)
+        time.sleep(1)
+        self.stop()
+          #global second
+        far_dist = 2000
+        second = self.read_distance()
+        self.servo(1400)
+        time.sleep(1)
+        self.stop()
+        if (first > far_dist):
+          self.right()
+          time.sleep(1)
+          self.stop()
+          self.fwd()
+          time.sleep(1)
+          self.left()
+          self.fwd
+        elif (second > far_dist): 
+          self.left()
+          time.sleep(1)
+          self.stop()
+          self.fwd()
+          time.sleep(1)
+          self.right()
+          self.fwd
+        else:
+          self.back()
+          time.sleep(1)
+
+          self.right()
+          time.sleep(1)
+          self.fwd()
+          time.sleep(1)
+          self.left()
+          time.sleep(1)
+          self.fwd()
+          time.sleep(1)
+            #self.Choice()
+    def Ben(self):
+      while True:
+        self.fwd()
+        self.servo(1300)
+        if self.read_distance() < 200:
+          self.stop()
+          self.servo(2000)
+          if self.read_distance() > 200:
+            self.left()
+            time.sleep(1)
+          else:
+            self.right()
+            time.sleep(1) 
+    def Maze(self):
+      while True:
+        sleepy = .25
+        dist_sens = 125
+        self.fwd()
+        if (self.read_distance() <= dist_sens):
+          self.stop()
+          self.servo(800)
+          time.sleep(.25)
+          righty = self.read_distance()
+          self.servo(2000)
+          time.sleep(.25)
+          lefty = self.read_distance()
+          self.servo(1300)
+          if lefty > righty:
+            self.left()
+            time.sleep(1)
+            self.fwd()
+          if righty > lefty:
+            self.right()
+            time.sleep(1)
+            self.fwd()
+          else:
+            self.back() 
+
+
+      '''
+      while (self.read_distance() > 100):
+        self.fwd()
+        if (self.read_distance() <= 100):
+          self.right()
+      '''
+
+
+    
+      
+
+    def square(self):
+      for i in range(1, 5):
+        self.deg_fwd(540)
+        time.sleep(3)
+          #self.turn_by_deg(90)
+        self.right(primary = 50, counter = -40)
+        time.sleep(1)
+      self.stop()
+
+    def dance(self):
+      if safe_to_dance(): 
+       pass
+      else:
+        pass
+       
+
+
+      """A higher-ordered algorithm to make your robot dance"""
+        
+        
+      ''''  # lower-ordered example...
+      self.right(primary=50, counter=50)
+      time.sleep(2)
+      self.stop()'''
         
 
     def safe_to_dance(self):
         """ Does a 360 distance check and returns true if safe """
-        #if safe_to_dance():
-    
-    
+        if safe_to_dance():
+          pass
+
     def shake(self):
         """ Another example move """
         self.deg_fwd(720)
