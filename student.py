@@ -48,7 +48,7 @@ class Piggy(PiggyParent):
                 "ben": ("D maze", self.Ben),
                 "m": ("do maze", self.Maze),
                 "b": ("Square test", self.square),
-                "sw":("Swerve", dir.swr)
+                "sw":("Swerve", self.swr)
                 }
         # loop and print the menu...
         for key in sorted(menu.keys()):
