@@ -129,7 +129,7 @@ class Piggy(PiggyParent):
       self.fwd()
       if self.read_distance() < 150:
         while True:
-          eself.swr("left")
+          self.swr("left")
 
 
    #edward helped me with this the commented text was what I tried. why did it not work?   
