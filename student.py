@@ -126,7 +126,7 @@ class Piggy(PiggyParent):
         time.sleep(1.5)
 
     def swerve(self):
-      self.swr
+      self.swr(left)
 
 
 
