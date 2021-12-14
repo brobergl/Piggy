@@ -208,6 +208,7 @@ class Piggy(PiggyParent):
             time.sleep(1) 
     def Maze(self):
       while True:
+        self.servo(self.MIDPOINT)
         sleepy = .25
         dist_sens = 125
         self.fwd()
