@@ -127,9 +127,9 @@ class Piggy(PiggyParent):
 
     def swerve(self):
       self.fwd()
-      while True:
-        self.read_distance() < 150
-        self.swr("left")
+      if self.read_distance() < 150:
+        while True:
+          eself.swr("left")
 
 
    #edward helped me with this the commented text was what I tried. why did it not work?   
